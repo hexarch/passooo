@@ -1,0 +1,15 @@
+<!-- res/drawable/edittext_border.xml -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Çerçeve rengi ve kalınlığı -->
+    <stroke
+        android:width="3dp"
+        android:color="@color/white" />
+
+    <!-- Köşelerin yuvarlaklığı -->
+    <corners
+        android:radius="4dp" />
+
+</shape>

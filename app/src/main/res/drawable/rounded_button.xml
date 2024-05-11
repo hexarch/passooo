@@ -1,0 +1,7 @@
+<!-- rounded_button.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <corners android:radius="10000dp" /> <!-- Yuvarlak köşe yarıçapı -->
+    <solid android:color="@color/blue" /> <!-- Dolum rengi -->
+</shape>

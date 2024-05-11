@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    tools:context=".selecticon">
+    <RelativeLayout
+        android:id="@+id/topRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+        <RelativeLayout
+            android:id="@+id/topRelativeLayoutleft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/btnadobe"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@drawable/adobe100x100"
+         />
+        <TextView
+            android:layout_below="@+id/btnadobe"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adobe"
+            >
+        </TextView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/topRelativeLayoutcenter"
+            android:layout_toEndOf="@id/topRelativeLayoutleft"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/btnairbnb"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+
+            android:background="@drawable/airbnb100x100"/>
+            <TextView
+                android:layout_below="@+id/btnairbnb"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Airbnb"
+                > </TextView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/topRelativeLayoutcentera"
+            android:layout_toEndOf="@id/topRelativeLayoutcenter"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_height="wrap_content">
+        <ImageButton
+            android:background="@drawable/amazon100x100"
+            android:id="@+id/btnamazon"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+             />
+            <TextView
+                android:layout_below="@+id/btnamazon"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Amazon"
+                > </TextView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/topRelativeLayoutright"
+            android:layout_toEndOf="@id/topRelativeLayoutcentera"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_height="wrap_content">
+        <ImageButton
+            android:background="@drawable/android100x100"
+            android:id="@+id/btnandroid"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+
+            />
+            <TextView
+                android:layout_below="@+id/btnandroid"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Android"
+                > </TextView>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/topRelativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topRelativeLayout"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+
+        <RelativeLayout
+            android:id="@+id/topRelativeLayoutleft2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:id="@+id/btnapple"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="@drawable/appel100x100"
+                />
+            <TextView
+                android:layout_below="@+id/btnapple"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apple"
+                >
+            </TextView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/topRelativeLayoutcenter2"
+            android:layout_toEndOf="@id/topRelativeLayoutleft2"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:id="@+id/btnatlassian"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="@drawable/atlassian100x100"/>
+            <TextView
+                android:layout_below="@+id/btnatlassian"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Atlassian"
+                > </TextView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/topRelativeLayoutcentera2"
+            android:layout_toEndOf="@id/topRelativeLayoutcenter2"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:background="@drawable/bitbucker100x100"
+                android:id="@+id/btnbitbucket"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                />
+            <TextView
+                android:layout_below="@+id/btnbitbucket"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bitbucket"
+                > </TextView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/topRelativeLayoutright2"
+            android:layout_toEndOf="@id/topRelativeLayoutcentera2"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:background="@drawable/bitcoin100x100"
+                android:id="@+id/btnbitcoin"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+
+                />
+            <TextView
+                android:layout_below="@+id/btnbitcoin"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bitcoin"
+                > </TextView>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/topRelativeLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topRelativeLayout1"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+
+        <RelativeLayout
+            android:id="@+id/topRelativeLayoutleft3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:id="@+id/btnblogger"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="@drawable/blogger100x100"
+                />
+            <TextView
+                android:layout_below="@+id/btnblogger"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Blogger"
+                >
+            </TextView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/topRelativeLayoutcenter3"
+            android:layout_toEndOf="@id/topRelativeLayoutleft3"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:id="@+id/btndiscord"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="@drawable/discord100x100"/>
+            <TextView
+                android:layout_below="@+id/btndiscord"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Discord"
+                > </TextView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/topRelativeLayoutcentera3"
+            android:layout_toEndOf="@id/topRelativeLayoutcenter3"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:background="@drawable/dropbox100x100"
+                android:id="@+id/btndropbox"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                />
+            <TextView
+                android:layout_below="@+id/btndropbox"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dropbox"
+                > </TextView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/topRelativeLayoutright3"
+            android:layout_toEndOf="@id/topRelativeLayoutcentera3"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:background="@drawable/ebay100x100"
+                android:id="@+id/btnebay"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+
+                />
+            <TextView
+                android:layout_below="@+id/btnebay"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ebay"
+                > </TextView>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>
