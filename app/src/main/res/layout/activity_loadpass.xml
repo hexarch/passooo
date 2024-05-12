@@ -17,6 +17,7 @@
         android:padding="1dp">
         <!-- Sol taraftaki ImageButton -->
         <RelativeLayout
+            android:layout_marginTop="20dp"
             android:id="@+id/relativeLayoutexit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -158,6 +159,11 @@
         android:layout_height="wrap_content"
         >
         <RelativeLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/pas"
+            android:layout_height="wrap_content">
+
+        <RelativeLayout
             android:id="@+id/solrelative"
             android:layout_width="260dp"
             android:layout_height="wrap_content">
@@ -203,6 +209,22 @@
                 android:src="@drawable/copy100" />
         </RelativeLayout>
 
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_below="@id/pas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <ProgressBar
+                android:id="@+id/horizontalProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="16dp"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:max="100"
+                android:progress="0"
+                />
+        </RelativeLayout>
       <!-- Göz simgesi -->
     </RelativeLayout>
 

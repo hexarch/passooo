@@ -20,7 +20,7 @@ public class addpass extends AppCompatActivity {
     String sqlname,sqlusername,sqlmail,sqlpass,sqlnotes,sqlicon,sqlid = "s";
     String username,mail,pass,notes,name,idi ,web = null;
     private ProgressBar progressBar;
-    public   int strength = 0;
+
     String intname,intusername,intmail,intpass,intnotes,intwebsite;
     int flag = 0;
     private DatabaseHelper databaseHelper;
@@ -340,105 +340,108 @@ public class addpass extends AppCompatActivity {
 
 
 
-        editTextPass.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Metin değişmeden önceki durum
+              editTextPass.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    // Metin değişmeden önceki durum
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    // Metin değiştiği zaman çağrılır
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    // Metin değiştikten sonra çağrılır
+                    String password = s.toString();
+                    int passwordStrength = calculatePasswordStrength(password);
+
+                    // Zorluk seviyesine göre mesaj oluştur
+                    String message = getMessageByPasswordStrength(passwordStrength);
+
+                    // Mesajı ekrana göster
+                    Toast.makeText(addpass.this, message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(addpass.this, "Zorluk seviyesi: " + passwordStrength, Toast.LENGTH_SHORT).show();
+                    progressBar.setProgress(passwordStrength);
+                    updateProgressBarColor(progressBar, passwordStrength);
+                }
+            });
+        }
+
+        private int calculatePasswordStrength(String password) {
+            // Şifrenin zorluk seviyesini hesapla
+            // Örnek: Şifrenin zorluk seviyesini belirlemek için belirli kriterleri değerlendir
+            // Burada kendi zorluk seviyesi hesaplama mantığınızı uygulayabilirsiniz
+            // Örneğin, uzunluk, harf/karakter tipleri, rakam içeriği, özel karakterler, vb. değerlendirilebilir
+            int strength = 0;
+
+            // Örnek bir zorluk seviyesi hesaplama algoritması
+            if (password.length() >= 8) {
+                strength += password.length();
             }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Metin değiştiği zaman çağrılır
+            if (containsUpperCase(password)) {
+                strength += 20;
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Metin değiştikten sonra çağrılır
-                String password = s.toString();
-                int passwordStrength = calculatePasswordStrength(password);
-
-                // Zorluk seviyesine göre mesaj oluştur
-                String message = getMessageByPasswordStrength(passwordStrength);
-
-                // Mesajı ekrana göster
-                Toast.makeText(addpass.this, message, Toast.LENGTH_SHORT).show();
-                int progressValue = 0;
-                progressBar.setProgress(progressValue);
-                progressBar.setMax(100);
-                updateProgressBarColor(progressBar, progressValue);
+            if (containsLowerCase(password)) {
+                strength += 20;
             }
-        });
-    }
-
-    private int calculatePasswordStrength(String password) {
-        // Şifrenin zorluk seviyesini hesapla
-        // Örnek: Şifrenin zorluk seviyesini belirlemek için belirli kriterleri değerlendir
-        // Burada kendi zorluk seviyesi hesaplama mantığınızı uygulayabilirsiniz
-        // Örneğin, uzunluk, harf/karakter tipleri, rakam içeriği, özel karakterler, vb. değerlendirilebilir
-
-
-        // Örnek bir zorluk seviyesi hesaplama algoritması
-        if (password.length() >= 8) {
-            strength += 20;
-        }
-        if (containsUpperCase(password)) {
-            strength += 20;
-        }
-        if (containsLowerCase(password)) {
-            strength += 20;
-        }
-        if (containsDigit(password)) {
-            strength += 20;
-        }
-        if (containsSpecialCharacter(password)) {
-            strength += 20;
+            if (containsDigit(password)) {
+                strength += 20;
+            }
+            if (containsSpecialCharacter(password)) {
+                strength += 20;
+            }
+            return strength;
         }
 
-        return strength;
-    }
-
-    private boolean containsUpperCase(String password) {
-        // Büyük harf kontrolü
-        return !password.equals(password.toLowerCase());
-    }
-
-    private boolean containsLowerCase(String password) {
-        // Küçük harf kontrolü
-        return !password.equals(password.toUpperCase());
-    }
-
-    private boolean containsDigit(String password) {
-        // Rakam kontrolü
-        return password.matches(".*\\d.*");
-    }
-
-    private boolean containsSpecialCharacter(String password) {
-        // Özel karakter kontrolü
-        return !password.matches("[A-Za-z0-9 ]*");
-    }
-
-    private String getMessageByPasswordStrength(int strength) {
-        // Zorluk seviyesine göre mesaj oluştur
-        if (strength >= 80) {
-            return "Şifreniz çok güçlü!";
-        } else if (strength >= 60) {
-            return "Şifreniz güçlü!";
-        } else if (strength >= 40) {
-            return "Şifreniz orta güçte.";
-        } else {
-            return "Şifreniz zayıf, daha güçlü bir şifre oluşturun!";
+        private boolean containsUpperCase(String password) {
+            // Büyük harf kontrolü
+            return !password.equals(password.toLowerCase());
         }
-    }
+
+        private boolean containsLowerCase(String password) {
+            // Küçük harf kontrolü
+            return !password.equals(password.toUpperCase());
+        }
+
+        private boolean containsDigit(String password) {
+            // Rakam kontrolü
+            return password.matches(".*\\d.*");
+        }
+
+        private boolean containsSpecialCharacter(String password) {
+            // Özel karakter kontrolü
+            return !password.matches("[A-Za-z0-9 ]*");
+        }
+
+        private String getMessageByPasswordStrength(int strength) {
+            // Zorluk seviyesine göre mesaj oluştur
+            if (strength >= 80) {
+                return "Şifreniz çok güçlü!";
+            } else if (strength >= 60) {
+                return "Şifreniz güçlü!";
+            } else if (strength >= 40) {
+                return "Şifreniz orta güçte.";
+            } else {
+                return "Şifreniz zayıf, daha güçlü bir şifre oluşturun!";
+            }
+        }
 
     private void updateProgressBarColor(ProgressBar progressBar, int progressValue) {
-        // İlerleme değerine göre progress bar rengini güncelle
-        if (progressValue < 40) {
-            progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progress_bar));
-        } else if (progressValue < 60) {
+        if (progressValue <= 25) {
+            progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progress_bar_red));
+        } else if (progressValue <= 60) {
+            progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progress_bar_orange));
+        } else if (progressValue <= 80) {
             progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progress_bar_yellow));
         } else {
             progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progress_bar_green));
         }
+
+        progressBar.setProgress(progressValue);
     }
-    }
+
+
+}
 

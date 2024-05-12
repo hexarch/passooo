@@ -10,6 +10,7 @@
     <!-- Üstteki RelativeLayout -->
     
     <RelativeLayout
+
         android:background="@color/blue"
         android:id="@+id/rellayouthead"
         android:layout_width="match_parent"
@@ -17,6 +18,7 @@
         android:padding="1dp">
         <!-- Sol taraftaki ImageButton -->
         <RelativeLayout
+            android:layout_marginTop="20dp"
             android:id="@+id/relativeLayoutexit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -39,6 +41,7 @@
         </ImageButton>
     </RelativeLayout>
         <RelativeLayout
+
             android:layout_below="@id/relativeLayoutexit"
             android:id="@+id/topRelativeLayout"
             android:layout_width="match_parent"
@@ -160,7 +163,6 @@
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:max="100"
                 android:progress="0"
-                android:progressDrawable="@drawable/custom_progress_bar"
             />
 
         </RelativeLayout>

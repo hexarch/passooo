@@ -8,14 +8,17 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
 import android.text.TextPaint;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +30,8 @@ public class loadpass extends AppCompatActivity {
     ImageButton button ,geri,btnsave;
     String sqlname,sqlusername,sqlmail,sqlpass,sqlnotes,sqlicon,sqlid = "s";
     String username,mail,pass,notes,name,idi,web = null;
+    private ProgressBar progressBar;
+
     private ImageButton usrCopyButton , mailCopyButton , passCopyButton , notesCopyButton,webCopyButton,webButton;
     String intname,intusername,intmail,intpass,intnotes,intweb;
 
@@ -37,6 +42,12 @@ public class loadpass extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_loadpass);
+        progressBar = findViewById(R.id.horizontalProgressBar);
+        startPasswordStrengthCalculator();
+
+
+
+
         ListView listView = findViewById(R.id.editTexthistory);
         DatabaseHelper dbHelper = new DatabaseHelper(this);
 
@@ -429,7 +440,142 @@ public class loadpass extends AppCompatActivity {
                 }
             }
         });
+
+
+
+
+        editTextPass.addTextChangedListener(new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            String password = s.toString();
+            int passwordStrength = calculatePasswordStrength(password);
+
+            // Zorluk seviyesine göre mesaj oluştur
+            String message = getMessageByPasswordStrength(passwordStrength);
+
+            // Mesajı ekrana göster
+            Toast.makeText(loadpass.this, message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(loadpass.this, "Zorluk seviyesi: " + passwordStrength, Toast.LENGTH_SHORT).show();
+            progressBar.setProgress(passwordStrength);
+            updateProgressBarColor(progressBar, passwordStrength);
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            // Metin değiştiği zaman çağrılır
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            // Metin değiştikten sonra çağrılır
+            String password = s.toString();
+            int passwordStrength = calculatePasswordStrength(password);
+
+            // Zorluk seviyesine göre mesaj oluştur
+            String message = getMessageByPasswordStrength(passwordStrength);
+
+            // Mesajı ekrana göster
+            Toast.makeText(loadpass.this, message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(loadpass.this, "Zorluk seviyesi: " + passwordStrength, Toast.LENGTH_SHORT).show();
+            progressBar.setProgress(passwordStrength);
+            updateProgressBarColor(progressBar, passwordStrength);
+        }
+    });
+}
+    // EditText bileşenlerine metin girildiğinde zorluk seviyesini hesapla
+    private void startPasswordStrengthCalculator()
+    {
+
+        Intent intent = getIntent();
+        String password =   intpass = intent.getStringExtra("pass");
+        int passwordStrength = calculatePasswordStrength(password);
+
+        // Zorluk seviyesine göre mesaj oluştur
+        String message = getMessageByPasswordStrength(passwordStrength);
+
+        // Mesajı ekrana göster
+        Toast.makeText(loadpass.this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(loadpass.this, "Zorluk seviyesi: " + passwordStrength, Toast.LENGTH_SHORT).show();
+        progressBar.setProgress(passwordStrength);
+        updateProgressBarColor(progressBar, passwordStrength);
     }
 
+    private int calculatePasswordStrength(String password) {
+        // Şifrenin zorluk seviyesini hesapla
+        // Örnek: Şifrenin zorluk seviyesini belirlemek için belirli kriterleri değerlendir
+        // Burada kendi zorluk seviyesi hesaplama mantığınızı uygulayabilirsiniz
+        // Örneğin, uzunluk, harf/karakter tipleri, rakam içeriği, özel karakterler, vb. değerlendirilebilir
+        int strength = 0;
+
+        // Örnek bir zorluk seviyesi hesaplama algoritması
+        if (password.length() >= 8) {
+            strength += password.length();
+        }
+        if (containsUpperCase(password)) {
+            strength += 20;
+        }
+        if (containsLowerCase(password)) {
+            strength += 20;
+        }
+        if (containsDigit(password)) {
+            strength += 20;
+        }
+        if (containsSpecialCharacter(password)) {
+            strength += 20;
+        }
+        return strength;
+    }
+
+    private boolean containsUpperCase(String password) {
+        // Büyük harf kontrolü
+        return !password.equals(password.toLowerCase());
+    }
+
+    private boolean containsLowerCase(String password) {
+        // Küçük harf kontrolü
+        return !password.equals(password.toUpperCase());
+    }
+
+    private boolean containsDigit(String password) {
+        // Rakam kontrolü
+        return password.matches(".*\\d.*");
+    }
+
+    private boolean containsSpecialCharacter(String password) {
+        // Özel karakter kontrolü
+        return !password.matches("[A-Za-z0-9 ]*");
+    }
+
+    private String getMessageByPasswordStrength(int strength) {
+        // Zorluk seviyesine göre mesaj oluştur
+        if (strength >= 80) {
+            return "Şifreniz çok güçlü!";
+        } else if (strength >= 60) {
+            return "Şifreniz güçlü!";
+        } else if (strength >= 40) {
+            return "Şifreniz orta güçte.";
+        } else {
+            return "Şifreniz zayıf, daha güçlü bir şifre oluşturun!";
+        }
+    }
+
+    private void updateProgressBarColor(ProgressBar progressBar, int progressValue) {
+        if (progressValue <= 25) {
+            progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progress_bar_red));
+        } else if (progressValue <= 60) {
+            progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progress_bar_orange));
+        } else if (progressValue <= 80) {
+            progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progress_bar_yellow));
+        } else {
+            progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progress_bar_green));
+        }
+
+        progressBar.setProgress(progressValue);
+    }
+
+
 }
+
+
+
 
