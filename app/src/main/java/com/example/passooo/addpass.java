@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.Objects;
@@ -16,7 +19,8 @@ public class addpass extends AppCompatActivity {
     ImageButton button ,geri,btnsave;
     String sqlname,sqlusername,sqlmail,sqlpass,sqlnotes,sqlicon,sqlid = "s";
     String username,mail,pass,notes,name,idi ,web = null;
-
+    private ProgressBar progressBar;
+    public   int strength = 0;
     String intname,intusername,intmail,intpass,intnotes,intwebsite;
     int flag = 0;
     private DatabaseHelper databaseHelper;
@@ -25,6 +29,7 @@ public class addpass extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addpass);
+        progressBar = findViewById(R.id.horizontalProgressBar);
         editTextName = findViewById(R.id.editTextTextPersonName);
         editTextUsername = findViewById(R.id.editTextusername);
         editTextMail = findViewById(R.id.editTextmail);
@@ -58,7 +63,7 @@ public class addpass extends AppCompatActivity {
                     passwordVisible = true;
                 } else {
                     // Şifreyi gizle
-                    showPasswordButton.setImageResource(R.drawable.closedeye);
+                    showPasswordButton.setImageResource(R.drawable.closeeye);
                     passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     passwordVisible = false;
                 }
@@ -90,194 +95,154 @@ public class addpass extends AppCompatActivity {
         if (veri != null) {
             button.setBackground(null);
             button.setScaleType(ImageButton.ScaleType.FIT_CENTER);
-        }
-        if(Objects.equals(veri, "Adobe"))
-        {
-          button.setImageResource(R.drawable.adobe100x100);
-        }
-        if(Objects.equals(veri, "Airbnb"))
-        {
-            button.setImageResource(R.drawable.airbnb100x100);
-        }
-        if(Objects.equals(veri, "Amazon"))
-        {
-            button.setImageResource(R.drawable.amazon100x100);
-        }
-        if(Objects.equals(veri, "Android"))
-        {
-            button.setImageResource(R.drawable.android100x100);
-        }
-        if(Objects.equals(veri, "Apple"))
-        {
-                button.setImageResource(R.drawable.appel100x100);
-        }
-        if(Objects.equals(veri, "Atlassian"))
-        {
-            button.setImageResource(R.drawable.atlassian100x100);
-        }
-        if(Objects.equals(veri, "Bitbucket"))
-        {
-            button.setImageResource(R.drawable.bitbucker100x100);
-        }
-        if(Objects.equals(veri, "Bitcoin"))
-        {
-            button.setImageResource(R.drawable.bitcoin100x100);
-        }
-        if(Objects.equals(veri, "Blogger"))
-        {
-            button.setImageResource(R.drawable.blogger100x100);
-        }
-        if(Objects.equals(veri, "Discord"))
-        {
-            button.setImageResource(R.drawable.discord100x100);
-        }
-        if(Objects.equals(veri, "Dropbox"))
-        {
-            button.setImageResource(R.drawable.dropbox100x100);
-        }
-        if(Objects.equals(veri, "Ebay"))
-        {
-            button.setImageResource(R.drawable.ebay100x100);
-        }
-        if(Objects.equals(veri, "flickr"))
-        {
-            button.setImageResource(R.drawable.flickr100x100);
-        }
 
-        if(Objects.equals(veri, "Github"))
-        {
-            button.setImageResource(R.drawable.github100x100);
-        }
+            switch (veri) {
+                case "Adobe":
+                    button.setImageResource(R.drawable.adobe100x100);
+                    break;
+                case "Airbnb":
+                    button.setImageResource(R.drawable.airbnb100x100);
+                    break;
+                case "Amazon":
+                    button.setImageResource(R.drawable.amazon100x100);
+                    break;
+                case "Android":
+                    button.setImageResource(R.drawable.android100x100);
+                    break;
+                case "Apple":
+                    button.setImageResource(R.drawable.appel100x100);
+                    break;
+                case "Atlassian":
+                    button.setImageResource(R.drawable.atlassian100x100);
+                    break;
+                case "Bitbucket":
+                    button.setImageResource(R.drawable.bitbucker100x100);
+                    break;
+                case "Bitcoin":
+                    button.setImageResource(R.drawable.bitcoin100x100);
+                    break;
+                case "Blogger":
+                    button.setImageResource(R.drawable.blogger100x100);
+                    break;
+                case "Discord":
+                    button.setImageResource(R.drawable.discord100x100);
+                    break;
+                case "Dropbox":
+                    button.setImageResource(R.drawable.dropbox100x100);
+                    break;
+                case "Ebay":
+                    button.setImageResource(R.drawable.ebay100x100);
+                    break;
+                case "Epic":
+                    button.setImageResource(R.drawable.epic100x100);
+                    break;
+                case "Facebook":
+                    button.setImageResource(R.drawable.facebook);
+                    break;
+                case "Flickr":
+                    button.setImageResource(R.drawable.flickr100x100);
+                    break;
+                case "Github":
+                    button.setImageResource(R.drawable.github100x100);
+                    break;
+                case "Gmail":
+                    button.setImageResource(R.drawable.gmail100x100);
+                    break;
+                case "Google":
+                    button.setImageResource(R.drawable.google100x100);
+                    break;
+                case "Huawei":
+                    button.setImageResource(R.drawable.huawei100x100);
+                    break;
+                case "Instagram":
+                    button.setImageResource(R.drawable.instagramicon150x150);
+                    break;
+                case "Linkedin":
+                    button.setImageResource(R.drawable.linkedln100x100);
+                    break;
+                case "Microsoft":
+                    button.setImageResource(R.drawable.microsoft100x100);
+                    break;
+                case "Netflix":
+                    button.setImageResource(R.drawable.netflix100x100);
+                    break;
+                case "Mastercard":
+                    button.setImageResource(R.drawable.mastercard100x100);
+                    break;
+                case "Nintendo":
+                    button.setImageResource(R.drawable.nintendo100x100);
+                    break;
+                case "Paypal":
+                    button.setImageResource(R.drawable.paypal100x100);
+                    break;
+                case "Playstation":
+                    button.setImageResource(R.drawable.playstation100x100);
+                    break;
+                case "Reddit":
+                    button.setImageResource(R.drawable.redditicon150x150);
+                    break;
+                case "Skype":
+                    button.setImageResource(R.drawable.skype100x100);
+                    break;
+                case "Slack":
+                    button.setImageResource(R.drawable.slack100x100);
+                    break;
+                case "Snapchat":
+                    button.setImageResource(R.drawable.snapchat100x100);
+                    break;
+                case "Spotify":
+                    button.setImageResource(R.drawable.spotify100x100);
+                    break;
+                case "Steam":
+                    button.setImageResource(R.drawable.steamicon2);
+                    break;
+                case "Teamviewer":
+                    button.setImageResource(R.drawable.teamviewer100x100);
+                    break;
+                case "Telegram":
+                    button.setImageResource(R.drawable.telegram100x100);
+                    break;
+                case "Tinder":
+                    button.setImageResource(R.drawable.tinder100x100);
+                    break;
+                case "Tumblr":
+                    button.setImageResource(R.drawable.tumblr100x100);
+                    break;
+                case "Twitch":
+                    button.setImageResource(R.drawable.twitch100x100);
+                    break;
+                case "X":
+                    button.setImageResource(R.drawable.twittericon150x150);
+                    break;
+                case "Visa":
+                    button.setImageResource(R.drawable.visa100x100);
+                    break;
+                case "Vk":
+                    button.setImageResource(R.drawable.vk100x100);
+                    break;
+                case "We Chat":
+                    button.setImageResource(R.drawable.wechat100x100);
+                    break;
+                case "Windows":
+                    button.setImageResource(R.drawable.windows100x100);
+                    break;
+                case "Xbox":
+                    button.setImageResource(R.drawable.xbox100x100);
+                    break;
+                case "Xiaomi":
+                    button.setImageResource(R.drawable.xiaomi100x100);
+                    break;
+                case "Youtube":
+                    button.setImageResource(R.drawable.youtube100x100);
+                    break;
+                case "Zoom":
+                    button.setImageResource(R.drawable.zoom100x100);
+                    break;
 
-        if(Objects.equals(veri, "Gmail"))
-        {
-            button.setImageResource(R.drawable.gmail100x100);
-        }
-
-        if(Objects.equals(veri, "Google"))
-        {
-            button.setImageResource(R.drawable.google100x100);
-        }
-
-        if(Objects.equals(veri, "Huawei"))
-        {
-            button.setImageResource(R.drawable.huawei100x100);
-        }
-
-        if(Objects.equals(veri, "Instagram"))
-        {
-            button.setImageResource(R.drawable.instagramicon150x150);
-        }
-
-        if(Objects.equals(veri, "Linkedin"))
-        {
-            button.setImageResource(R.drawable.linkedln100x100);
-        }
-
-        if(Objects.equals(veri, "Microsoft"))
-        {
-            button.setImageResource(R.drawable.microsoft100x100);
-        }
-
-        if(Objects.equals(veri, "Netflix"))
-        {
-            button.setImageResource(R.drawable.netflix100x100);
-        }
-
-        if(Objects.equals(veri, "Nintendo"))
-        {
-            button.setImageResource(R.drawable.nintendo100x100);
-        }
-
-        if(Objects.equals(veri, "Outlook"))
-        {
-            button.setImageResource(R.drawable.outlook100x100);
-        }
-
-        if(Objects.equals(veri, "Paypal"))
-        {
-            button.setImageResource(R.drawable.paypal100x100);
-        }
-
-        if(Objects.equals(veri, "Playstation"))
-        {
-            button.setImageResource(R.drawable.playstation100x100);
-        }
-        if(Objects.equals(veri, "Reddit"))
-        {
-            button.setImageResource(R.drawable.redditicon150x150);
-        }
-        if(Objects.equals(veri, "Skype"))
-        {
-            button.setImageResource(R.drawable.skype100x100);
-        }
-        if(Objects.equals(veri, "Slack"))
-        {
-            button.setImageResource(R.drawable.slack100x100);
-        }
-        if(Objects.equals(veri, "Snapchat"))
-        {
-            button.setImageResource(R.drawable.snapchat100x100);
-        }
-        if(Objects.equals(veri, "Spotify"))
-        {
-            button.setImageResource(R.drawable.spotify100x100);
-        }
-        if(Objects.equals(veri, "Steam"))
-        {
-            button.setImageResource(R.drawable.steamicon2);
-        }
-        if(Objects.equals(veri, "Teamviewer"))
-        {
-            button.setImageResource(R.drawable.teamviewer100x100);
-        }
-        if(Objects.equals(veri, "Telegram"))
-        {
-            button.setImageResource(R.drawable.telegram100x100);
-        }
-        if(Objects.equals(veri, "Tinder"))
-        {
-            button.setImageResource(R.drawable.tinder100x100);
-        }
-        if(Objects.equals(veri, "Twitch"))
-        {
-            button.setImageResource(R.drawable.twitch100x100);
-        }
-        if(Objects.equals(veri, "tumblr"))
-        {
-            button.setImageResource(R.drawable.tumblr100x100);
-        }
-        if(Objects.equals(veri, "Twitter"))
-        {
-            button.setImageResource(R.drawable.twittericon150x150);
-        }
-        if(Objects.equals(veri, "Visa"))
-        {
-            button.setImageResource(R.drawable.visa100x100);
-        }
-        if(Objects.equals(veri, "Vk"))
-        {
-            button.setImageResource(R.drawable.vk100x100);
-        }
-        if(Objects.equals(veri, "Windows"))
-        {
-            button.setImageResource(R.drawable.windows100x100);
-        }
-        if(Objects.equals(veri, "Xbox"))
-        {
-            button.setImageResource(R.drawable.xbox100x100);
-        }
-        if(Objects.equals(veri, "Xiaomi"))
-        {
-            button.setImageResource(R.drawable.xiaomi100x100);
-        }
-        if(Objects.equals(veri, "Youtube"))
-        {
-            button.setImageResource(R.drawable.youtube100x100);
-        }
-        if(Objects.equals(veri, "Zoom"))
-        {
-            button.setImageResource(R.drawable.zoom100x100);
+                default:
+                    // Belirli bir duruma göre resim atanmadıysa varsayılan işlem yapılabilir
+                    break;
+            }
         }
 
         // Intent üzerinden verileri alarak EditText bileşenlerine yaz
@@ -370,7 +335,110 @@ public class addpass extends AppCompatActivity {
                 }
             }
         });
+
+
+
+
+
+        editTextPass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Metin değişmeden önceki durum
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Metin değiştiği zaman çağrılır
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Metin değiştikten sonra çağrılır
+                String password = s.toString();
+                int passwordStrength = calculatePasswordStrength(password);
+
+                // Zorluk seviyesine göre mesaj oluştur
+                String message = getMessageByPasswordStrength(passwordStrength);
+
+                // Mesajı ekrana göster
+                Toast.makeText(addpass.this, message, Toast.LENGTH_SHORT).show();
+                int progressValue = 0;
+                progressBar.setProgress(progressValue);
+                progressBar.setMax(100);
+                updateProgressBarColor(progressBar, progressValue);
+            }
+        });
     }
 
+    private int calculatePasswordStrength(String password) {
+        // Şifrenin zorluk seviyesini hesapla
+        // Örnek: Şifrenin zorluk seviyesini belirlemek için belirli kriterleri değerlendir
+        // Burada kendi zorluk seviyesi hesaplama mantığınızı uygulayabilirsiniz
+        // Örneğin, uzunluk, harf/karakter tipleri, rakam içeriği, özel karakterler, vb. değerlendirilebilir
 
-}
+
+        // Örnek bir zorluk seviyesi hesaplama algoritması
+        if (password.length() >= 8) {
+            strength += 20;
+        }
+        if (containsUpperCase(password)) {
+            strength += 20;
+        }
+        if (containsLowerCase(password)) {
+            strength += 20;
+        }
+        if (containsDigit(password)) {
+            strength += 20;
+        }
+        if (containsSpecialCharacter(password)) {
+            strength += 20;
+        }
+
+        return strength;
+    }
+
+    private boolean containsUpperCase(String password) {
+        // Büyük harf kontrolü
+        return !password.equals(password.toLowerCase());
+    }
+
+    private boolean containsLowerCase(String password) {
+        // Küçük harf kontrolü
+        return !password.equals(password.toUpperCase());
+    }
+
+    private boolean containsDigit(String password) {
+        // Rakam kontrolü
+        return password.matches(".*\\d.*");
+    }
+
+    private boolean containsSpecialCharacter(String password) {
+        // Özel karakter kontrolü
+        return !password.matches("[A-Za-z0-9 ]*");
+    }
+
+    private String getMessageByPasswordStrength(int strength) {
+        // Zorluk seviyesine göre mesaj oluştur
+        if (strength >= 80) {
+            return "Şifreniz çok güçlü!";
+        } else if (strength >= 60) {
+            return "Şifreniz güçlü!";
+        } else if (strength >= 40) {
+            return "Şifreniz orta güçte.";
+        } else {
+            return "Şifreniz zayıf, daha güçlü bir şifre oluşturun!";
+        }
+    }
+
+    private void updateProgressBarColor(ProgressBar progressBar, int progressValue) {
+        // İlerleme değerine göre progress bar rengini güncelle
+        if (progressValue < 40) {
+            progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progress_bar));
+        } else if (progressValue < 60) {
+            progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progress_bar_yellow));
+        } else {
+            progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progress_bar_green));
+        }
+    }
+    }
+

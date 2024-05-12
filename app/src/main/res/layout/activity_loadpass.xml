@@ -187,7 +187,7 @@
                android:layout_height="50dp"
                android:scaleType="centerCrop"
                android:background="@android:color/transparent"
-               android:src="@drawable/closedeye" />
+               android:src="@drawable/closeeye" />
        </RelativeLayout>
         <RelativeLayout
             android:layout_toEndOf="@+id/ortarelative"
@@ -312,13 +312,26 @@
         >
         <RelativeLayout
             android:id="@+id/historysolrelative"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="21dp"
+                android:textColor="@color/white"
+                android:id="@+id/lastupdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Update: "
+                >
+            </TextView>
             <ListView
+                android:layout_marginLeft="25dp"
+                android:layout_toEndOf="@id/lastupdate"
                 android:layout_marginTop="16dp"
                 android:textColorHint="@color/white"
                 android:shadowColor="@color/white"
                 android:id="@+id/editTexthistory"
+                android:textColor="@color/blue"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
             />

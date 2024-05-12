@@ -5,15 +5,18 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextPaint;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -26,7 +29,7 @@ public class loadpass extends AppCompatActivity {
     String username,mail,pass,notes,name,idi,web = null;
     private ImageButton usrCopyButton , mailCopyButton , passCopyButton , notesCopyButton,webCopyButton,webButton;
     String intname,intusername,intmail,intpass,intnotes,intweb;
-    int flag = 0;
+
     private DatabaseHelper databaseHelper;
     private EditText editTextUsername, editTextMail, editTextPass, editTextNotes, editTextName, editTextWeb;
     @Override
@@ -36,19 +39,30 @@ public class loadpass extends AppCompatActivity {
         setContentView(R.layout.activity_loadpass);
         ListView listView = findViewById(R.id.editTexthistory);
         DatabaseHelper dbHelper = new DatabaseHelper(this);
+
+
         List<String> updateTimes = dbHelper.getAllUpdateTimes();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-        android.R.layout.simple_list_item_1, updateTimes);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        android.R.layout.simple_list_item_1, updateTimes)
+        {
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view =super.getView(position, convertView, parent);
+            TextView textView=(TextView) view.findViewById(android.R.id.text1);
+            textView.setTextColor(Color.WHITE);
+            return view;
+        }
+    };
+
+
         listView.setAdapter(adapter);
         webButton = findViewById(R.id.webButton);
         webButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String websiteUrl = editTextWeb.getText().toString().trim();
-                Toast.makeText(getApplicationContext(), "deneme", Toast.LENGTH_SHORT).show();
                 if (!websiteUrl.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "deneme2", Toast.LENGTH_SHORT).show();
-                    // URL'yi doğru formatta kontrol et
+                   // URL'yi doğru formatta kontrol et
                         websiteUrl = "https://" + websiteUrl; // http:// veya https:// olmadan girilmişse ekle
                     // URL'yi açmak için tarayıcıyı başlat
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteUrl));
@@ -161,7 +175,7 @@ public class loadpass extends AppCompatActivity {
                     passwordVisible = true;
                 } else {
                     // Şifreyi gizle
-                    showPasswordButton.setImageResource(R.drawable.closedeye);
+                    showPasswordButton.setImageResource(R.drawable.closeeye);
                     passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     passwordVisible = false;
                 }
@@ -195,57 +209,156 @@ public class loadpass extends AppCompatActivity {
         if (veri != null) {
             button.setBackground(null);
             button.setScaleType(ImageButton.ScaleType.FIT_CENTER);
-        }
-        if(Objects.equals(veri, "Adobe"))
-        {
-            button.setImageResource(R.drawable.adobe100x100);
 
-        }
-        if(Objects.equals(veri, "Airbnb"))
-        {
-            button.setImageResource(R.drawable.airbnb100x100);
+            switch (veri) {
+                case "Adobe":
+                    button.setImageResource(R.drawable.adobe100x100);
+                    break;
+                case "Airbnb":
+                    button.setImageResource(R.drawable.airbnb100x100);
+                    break;
+                case "Amazon":
+                    button.setImageResource(R.drawable.amazon100x100);
+                    break;
+                case "Android":
+                    button.setImageResource(R.drawable.android100x100);
+                    break;
+                case "Apple":
+                    button.setImageResource(R.drawable.appel100x100);
+                    break;
+                case "Atlassian":
+                    button.setImageResource(R.drawable.atlassian100x100);
+                    break;
+                case "Bitbucket":
+                    button.setImageResource(R.drawable.bitbucker100x100);
+                    break;
+                case "Bitcoin":
+                    button.setImageResource(R.drawable.bitcoin100x100);
+                    break;
+                case "Blogger":
+                    button.setImageResource(R.drawable.blogger100x100);
+                    break;
+                case "Discord":
+                    button.setImageResource(R.drawable.discord100x100);
+                    break;
+                case "Dropbox":
+                    button.setImageResource(R.drawable.dropbox100x100);
+                    break;
+                case "Ebay":
+                    button.setImageResource(R.drawable.ebay100x100);
+                    break;
+                case "Epic":
+                    button.setImageResource(R.drawable.epic100x100);
+                    break;
+                case "Facebook":
+                    button.setImageResource(R.drawable.facebook);
+                    break;
+                case "Flickr":
+                    button.setImageResource(R.drawable.flickr100x100);
+                    break;
+                case "Github":
+                    button.setImageResource(R.drawable.github100x100);
+                    break;
+                case "Gmail":
+                    button.setImageResource(R.drawable.gmail100x100);
+                    break;
+                case "Google":
+                    button.setImageResource(R.drawable.google100x100);
+                    break;
+                case "Huawei":
+                    button.setImageResource(R.drawable.huawei100x100);
+                    break;
+                case "Instagram":
+                    button.setImageResource(R.drawable.instagramicon150x150);
+                    break;
+                case "Linkedin":
+                    button.setImageResource(R.drawable.linkedln100x100);
+                    break;
+                case "Microsoft":
+                    button.setImageResource(R.drawable.microsoft100x100);
+                    break;
+                case "Netflix":
+                    button.setImageResource(R.drawable.netflix100x100);
+                    break;
+                case "Mastercard":
+                    button.setImageResource(R.drawable.mastercard100x100);
+                    break;
+                case "Nintendo":
+                    button.setImageResource(R.drawable.nintendo100x100);
+                    break;
+                case "Paypal":
+                    button.setImageResource(R.drawable.paypal100x100);
+                    break;
+                case "Playstation":
+                    button.setImageResource(R.drawable.playstation100x100);
+                    break;
+                case "Reddit":
+                    button.setImageResource(R.drawable.redditicon150x150);
+                    break;
+                case "Skype":
+                    button.setImageResource(R.drawable.skype100x100);
+                    break;
+                case "Slack":
+                    button.setImageResource(R.drawable.slack100x100);
+                    break;
+                case "Snapchat":
+                    button.setImageResource(R.drawable.snapchat100x100);
+                    break;
+                case "Spotify":
+                    button.setImageResource(R.drawable.spotify100x100);
+                    break;
+                case "Steam":
+                    button.setImageResource(R.drawable.steamicon2);
+                    break;
+                case "Teamviewer":
+                    button.setImageResource(R.drawable.teamviewer100x100);
+                    break;
+                case "Telegram":
+                    button.setImageResource(R.drawable.telegram100x100);
+                    break;
+                case "Tinder":
+                    button.setImageResource(R.drawable.tinder100x100);
+                    break;
+                case "Tumblr":
+                    button.setImageResource(R.drawable.tumblr100x100);
+                    break;
+                case "Twitch":
+                    button.setImageResource(R.drawable.twitch100x100);
+                    break;
+                case "X":
+                    button.setImageResource(R.drawable.twittericon150x150);
+                    break;
+                case "Visa":
+                    button.setImageResource(R.drawable.visa100x100);
+                    break;
+                case "Vk":
+                    button.setImageResource(R.drawable.vk100x100);
+                    break;
+                case "We Chat":
+                    button.setImageResource(R.drawable.wechat100x100);
+                    break;
+                case "Windows":
+                    button.setImageResource(R.drawable.windows100x100);
+                    break;
+                case "Xbox":
+                    button.setImageResource(R.drawable.xbox100x100);
+                    break;
+                case "Xiaomi":
+                    button.setImageResource(R.drawable.xiaomi100x100);
+                    break;
+                case "Youtube":
+                    button.setImageResource(R.drawable.youtube100x100);
+                    break;
+                case "Zoom":
+                    button.setImageResource(R.drawable.zoom100x100);
+                    break;
 
+                default:
+                    // Belirli bir duruma göre resim atanmadıysa varsayılan işlem yapılabilir
+                    break;
+            }
         }
-        if(Objects.equals(veri, "Amazon"))
-        {
-            button.setImageResource(R.drawable.amazon100x100);
-        }
-        if(Objects.equals(veri, "Android"))
-        {
-            button.setImageResource(R.drawable.android100x100);
-        }
-        if(Objects.equals(veri, "Apple"))
-        {
-            button.setImageResource(R.drawable.appel100x100);
-        }
-        if(Objects.equals(veri, "Atlassian"))
-        {
-            button.setImageResource(R.drawable.atlassian100x100);
-        }
-        if(Objects.equals(veri, "Bitbucket"))
-        {
-            button.setImageResource(R.drawable.bitbucker100x100);
-        }
-        if(Objects.equals(veri, "Bitcoin"))
-        {
-            button.setImageResource(R.drawable.bitcoin100x100);
-        }
-        if(Objects.equals(veri, "Blogger"))
-        {
-            button.setImageResource(R.drawable.blogger100x100);
-        }
-        if(Objects.equals(veri, "Discord"))
-        {
-            button.setImageResource(R.drawable.discord100x100);
-        }
-        if(Objects.equals(veri, "Dropbox"))
-        {
-            button.setImageResource(R.drawable.dropbox100x100);
-        }
-        if(Objects.equals(veri, "Ebay"))
-        {
-            button.setImageResource(R.drawable.ebay100x100);
-        }
+
         // Intent üzerinden verileri alarak EditText bileşenlerine yaz
         idi = intent.getStringExtra("id");
         if (intent != null) {
@@ -302,9 +415,7 @@ public class loadpass extends AppCompatActivity {
                 if (name.isEmpty() || username.isEmpty() || mail.isEmpty() || pass.isEmpty() || notes.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Lütfen tüm alanları doldurunuz", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), ""+sqlid+"     "+idi, Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getApplicationContext(), "update", Toast.LENGTH_SHORT).show();
-                        DatabaseHelper databaseHelper = new DatabaseHelper(loadpass.this);
+                     DatabaseHelper databaseHelper = new DatabaseHelper(loadpass.this);
                         boolean result = databaseHelper.updateData(idi,name, username, mail, pass, notes,icon,web);
                         if (result) {
                             Toast.makeText(getApplicationContext(), "Veri başarıyla kaydedildiasdas", Toast.LENGTH_SHORT).show();

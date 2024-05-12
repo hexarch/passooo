@@ -14,19 +14,10 @@
     >
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="75dp"
-        android:layout_height="350dp"
-        android:src="@drawable/pasologo">
-    </ImageView>
-    <TextView
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pasoooo"
-        >
-
-
-    </TextView>
+        android:src="@drawable/pasologo">
+    </ImageView>
 </LinearLayout>
     <TextView
         android:id="@+id/textView"

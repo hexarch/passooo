@@ -2,11 +2,11 @@ package com.example.passooo;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -96,6 +96,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
     }
 
+
+
     // Belirli bir veriyi güncelleme işlemi
     public boolean updateData(String id, String name, String username, String mail, String password, String notes, String icon, String web) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -139,5 +141,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return updateTimes;
     }
+
+
 
 }

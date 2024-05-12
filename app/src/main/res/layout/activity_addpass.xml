@@ -118,6 +118,10 @@
         android:paddingRight="10dp"
         android:layout_height="wrap_content"
         >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/pas"
+            android:layout_height="wrap_content">
         <EditText
             android:paddingLeft="20dp"
             android:textColor="@color/white"
@@ -141,7 +145,25 @@
             android:layout_alignBottom="@id/editTextPassword"
             android:layout_alignEnd="@id/editTextPassword"
             android:background="@android:color/transparent"
-            android:src="@drawable/closedeye" /> <!-- Göz simgesi -->
+            android:src="@drawable/closeeye" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_below="@id/pas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <ProgressBar
+                android:id="@+id/horizontalProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="16dp"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/custom_progress_bar"
+            />
+
+        </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout
